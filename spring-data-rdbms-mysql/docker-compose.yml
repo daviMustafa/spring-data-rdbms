@@ -7,6 +7,7 @@ services:
   springboot-mysql:
     image: springboot-mysql:1.0
     container_name: backend
+    restart: on-failure
     build:
       context: ./
       dockerfile: Dockerfile
@@ -33,6 +34,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=MyAppDb
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=pass
     ports:
       - 3306:3306
     healthcheck:

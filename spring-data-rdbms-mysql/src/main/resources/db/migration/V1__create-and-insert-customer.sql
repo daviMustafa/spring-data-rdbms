@@ -1,10 +1,11 @@
 CREATE TABLE IF NOT EXISTS customer
 (
-    id       bigint      NOT NULL,
+    id        bigint      NOT NULL AUTO_INCREMENT,
     firstName varchar(20) NOT NULL,
-    lastName varchar(20) NOT NULL,
+    lastName  varchar(20) NOT NULL,
 
     PRIMARY KEY (id)
 );
 
-insert into customer(id, firstName, lastName) values (1,  'Davi', 'Mustafa');
+insert into customer(id, firstName, lastName)
+values (1, 'Davi', 'Mustafa');

@@ -1,16 +1,11 @@
 package com.example.springdatardbmsmysql.entity;
 
-
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-/**
- * https://vladmihalcea.com/9-high-performance-tips-when-using-mysql-with-jpa-and-hibernate/
- */
 @Entity
 @Table(name = "customer", schema = "public")
 @Getter
@@ -18,8 +13,7 @@ import javax.validation.constraints.NotNull;
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO, generator="native")
-    @GenericGenerator(name = "native", strategy = "native")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
     @NotNull
