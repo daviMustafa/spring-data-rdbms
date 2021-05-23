@@ -24,4 +24,10 @@ public class Customer {
     @Column(name = "lastName", columnDefinition = "varchar(20)", unique = true)
     public String lastName;
 
+    private Customer() {}
+
+    public Customer(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 }
