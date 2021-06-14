@@ -1,4 +1,4 @@
-package com.example.springdatardbmsmysql;
+package com.example.springdatardbmssqlserver;
 
 import org.junit.After;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +8,9 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
-import org.testcontainers.containers.MySQLContainer;
+import org.testcontainers.containers.MSSQLServerContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.utility.DockerImageName;
 
 
 /**
@@ -24,21 +25,26 @@ public class AbstractContainerBaseTest {
     @Autowired
     protected TestRestTemplate restTemplate;
 
-    private static final MySQLContainer<?> mySQLContainer = new MySQLContainer<>("mysql:8.0");
+    private static final DockerImageName myImage = DockerImageName.parse("microsoft/mssql-server-linux:2017-latest")
+            .asCompatibleSubstituteFor("mcr.microsoft.com/mssql/server");
+
+    private static final MSSQLServerContainer<?> msSQLContainer = new MSSQLServerContainer<>(myImage)
+            .withPassword("P@ssw0rd")
+            .acceptLicense();
 
     static {
-        mySQLContainer.start();
+        msSQLContainer.start();
     }
 
     @After
     public void after(){
-        mySQLContainer.close();
+        msSQLContainer.close();
     }
 
     @DynamicPropertySource
     static void databaseProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.datasource.url",mySQLContainer::getJdbcUrl);
-        registry.add("spring.datasource.username", mySQLContainer::getUsername);
-        registry.add("spring.datasource.password", mySQLContainer::getPassword);
+        registry.add("spring.datasource.url", msSQLContainer::getJdbcUrl);
+        registry.add("spring.datasource.username", msSQLContainer::getUsername);
+        registry.add("spring.datasource.password", msSQLContainer::getPassword);
     }
 }

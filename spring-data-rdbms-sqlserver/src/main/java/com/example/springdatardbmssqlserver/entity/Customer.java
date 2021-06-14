@@ -1,4 +1,4 @@
-package com.example.springdatardbmsmysql.entity;
+package com.example.springdatardbmssqlserver.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "customer", schema = "public")
+@Table(name = "customer", schema = "dbo")
 @Getter
 @Setter
 public class Customer {

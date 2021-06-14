@@ -7,18 +7,34 @@ services:
   springboot-sqlserver:
     image: springboot-sqlserver:1.0
     container_name: backend
+    restart: on-failure
     build:
       context: ./
-      dockerfile: Dockerfile
+      dockerfile: docker/app/Dockerfile
     ports:
       - 8081:8081
     expose:
       - "8081"
     depends_on:
-      - mongo
+      - myapp-sqlserver
     links:
-      - mongo
+      - myapp-sqlserver
     networks:
       - host
     hostname: localhost
+    environment:
+      - WAIT_HOSTS=myapp-sqlserver:1433
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=30
+      - WAIT_HOST_CONNECT_TIMEOUT=30
 
+  myapp-sqlserver:
+    image: microsoft/mssql-server-linux:2017-latest
+    container_name: bd
+    build:
+      context: ./
+      dockerfile: docker/database/Dockerfile
+    ports:
+      - 1433:1433
+    networks:
+      - host

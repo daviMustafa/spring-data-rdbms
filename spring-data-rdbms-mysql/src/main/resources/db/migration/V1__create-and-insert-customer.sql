@@ -7,5 +7,6 @@ CREATE TABLE IF NOT EXISTS customer
     PRIMARY KEY (id)
 );
 
-insert into customer(id, firstName, lastName)
-values (1, 'Davi', 'Mustafa');
+insert into customer(firstName, lastName)
+values ('Davi', 'Mustafa'),
+       ('TestFirstName', 'TestLastName');
