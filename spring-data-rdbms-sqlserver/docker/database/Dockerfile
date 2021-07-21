@@ -1,4 +1,4 @@
-FROM microsoft/mssql-server-linux:2017-latest
+FROM mcr.microsoft.com/mssql/server:2017-latest
 LABEL maintainer="daviMustafa"
 
 #SET DEFAULT ENV VARIABLES ( accept user agreement + sql server password)

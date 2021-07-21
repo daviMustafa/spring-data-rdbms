@@ -66,3 +66,9 @@
     GET http://localhost:{port}/spring-data-sqlserver-db/customer
     accept: application/json;charset=UTF-8
     Content-Type: application/json;charset=UTF-8
+
+## To access your database via terminal
+
+    - docker exec -it bd bash
+    - Inside your container type:
+        - sqlcmd -U sa -P P@ssword
