@@ -25,10 +25,7 @@ public class AbstractContainerBaseTest {
     @Autowired
     protected TestRestTemplate restTemplate;
 
-    private static final DockerImageName myImage = DockerImageName.parse("microsoft/mssql-server-linux:2017-latest")
-            .asCompatibleSubstituteFor("mcr.microsoft.com/mssql/server");
-
-    private static final MSSQLServerContainer<?> msSQLContainer = new MSSQLServerContainer<>(myImage)
+    private static final MSSQLServerContainer<?> msSQLContainer = new MSSQLServerContainer<>("mcr.microsoft.com/mssql/server:2017-latest")
             .withPassword("P@ssw0rd")
             .acceptLicense();
 
